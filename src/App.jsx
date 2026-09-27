@@ -3,9 +3,7 @@ import './App.css'
 function App() {
   return (
     <main className="landing">
-      <h1>
-        robusto<span>.</span>studio
-      </h1>
+      <h1><img src="/wordmark-sofachrome.png" alt="robusto.studio" /></h1>
     </main>
   )
 }

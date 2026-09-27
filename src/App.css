@@ -7,17 +7,13 @@
 
 h1 {
   margin: 0;
-  color: #8ce8ce;
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 1;
+  line-height: 0;
 }
 
-h1 span {
-  color: #b6f3dd;
+h1 img {
+  display: block;
+  width: min(22rem, 78vw);
+  height: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
