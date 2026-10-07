@@ -617,9 +617,9 @@ p {
   border: 0;
   background: var(--dark);
   color: var(--cream);
-  max-width: 1000px;
-  width: 90vw;
-  max-height: 90svh;
+  max-width: 1400px;
+  width: 94vw;
+  max-height: 94svh;
 }
 .lightbox::backdrop {
   background: #071610de;
@@ -680,7 +680,7 @@ p {
   line-height: 1;
 }
 .lightbox > img {
-  max-height: 65svh;
+  max-height: calc(94svh - 88px);
   object-fit: contain;
   margin: auto;
 }

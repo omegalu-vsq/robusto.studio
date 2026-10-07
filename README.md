@@ -83,7 +83,10 @@ et PDF.js. Les pages défilent directement sous une barre fine avec zoom, télé
 et fermeture. Le zoom va de 50 à 300 %, conserve la position de lecture et se
 réinitialise en cliquant sur le pourcentage. Tant que le PDF est ouvert,
 Ctrl + molette, Ctrl + / − et Ctrl + 0 pilotent aussi ce zoom (Cmd sur Mac).
-La molette conserve le point sous le curseur ; le défilement normal reste disponible.
+Le zoom au trackpad et à la molette est continu, sans seuil, et conserve le point
+sous le curseur. Les pages sont agrandies pendant le geste puis rendues à nouveau
+à la bonne résolution à son arrêt. Les boutons et raccourcis clavier gardent des
+paliers de 25 points ; le défilement normal reste disponible.
 Le texte reste sélectionnable et
 les liens du PDF fonctionnent. Seules les pages
 proches de la zone visible sont rendues pour limiter la mémoire utilisée.

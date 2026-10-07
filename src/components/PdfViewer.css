@@ -26,10 +26,17 @@
 .pdf-page {
   position: relative;
   flex-shrink: 0;
+  overflow: hidden;
   background: #fff;
 }
 .pdf-page canvas {
   display: block;
+}
+.pdf-page-content {
+  transform-origin: top left;
+}
+.pdf-viewer .textLayer ::selection {
+  color: transparent;
 }
 .pdf-status {
   font-size: 12px;

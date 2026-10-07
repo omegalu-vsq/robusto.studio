@@ -16,7 +16,7 @@ const options = {
   wasmUrl: `${import.meta.env.BASE_URL}pdfjs/wasm/`,
 }
 
-function PdfPage({ pageNumber, width, scrollRoot }) {
+function PdfPage({ pageNumber, width, renderWidth, scrollRoot }) {
   const container = useRef(null)
   const [visible, setVisible] = useState(pageNumber === 1)
   const [aspectRatio, setAspectRatio] = useState(1 / Math.SQRT2)
@@ -39,18 +39,23 @@ function PdfPage({ pageNumber, width, scrollRoot }) {
       aria-label={`Page ${pageNumber}`}
       style={{ width, aspectRatio }}
     >
-      {visible && width > 0 && (
-        <Page
-          pageNumber={pageNumber}
-          width={width}
-          devicePixelRatio={Math.min(window.devicePixelRatio || 1, 2, 2000 / width)}
-          loading={<p className="pdf-status" role="status">Chargement de la page…</p>}
-          error={<p className="pdf-status" role="alert">Cette page n’a pas pu être affichée.</p>}
-          onLoadSuccess={(page) => {
-            const viewport = page.getViewport({ scale: 1 })
-            setAspectRatio(viewport.width / viewport.height)
-          }}
-        />
+      {visible && renderWidth > 0 && (
+        <div
+          className="pdf-page-content"
+          style={{ width: renderWidth, transform: `scale(${width / renderWidth})` }}
+        >
+          <Page
+            pageNumber={pageNumber}
+            width={renderWidth}
+            devicePixelRatio={Math.min(window.devicePixelRatio || 1, 2, 2000 / renderWidth)}
+            loading={<p className="pdf-status" role="status">Chargement de la page…</p>}
+            error={<p className="pdf-status" role="alert">Cette page n’a pas pu être affichée.</p>}
+            onLoadSuccess={(page) => {
+              const viewport = page.getViewport({ scale: 1 })
+              setAspectRatio(viewport.width / viewport.height)
+            }}
+          />
+        </div>
       )}
     </div>
   )
@@ -61,10 +66,15 @@ export default function PdfViewer({ src, title, controlsTarget }) {
   const zoomAnchor = useRef(null)
   const zoomValue = useRef(100)
   const changeZoomRef = useRef(null)
+  const zoomRenderTimer = useRef(null)
   const [width, setWidth] = useState(0)
   const [numPages, setNumPages] = useState(0)
   const [zoom, setZoom] = useState(100)
+  const [renderZoom, setRenderZoom] = useState(100)
   const pageWidth = Math.round(width * zoom / 100)
+  const renderWidth = Math.round(width * renderZoom / 100)
+
+  useEffect(() => () => clearTimeout(zoomRenderTimer.current), [])
 
   useEffect(() => {
     const element = scrollRoot.current
@@ -89,9 +99,9 @@ export default function PdfViewer({ src, title, controlsTarget }) {
       viewer.scrollLeft = page.offsetLeft + page.offsetWidth * anchor.x - viewportX
     }
     zoomAnchor.current = null
-  }, [pageWidth])
+  }, [pageWidth, zoom])
 
-  function changeZoom(requestedZoom, pointer) {
+  function changeZoom(requestedZoom, pointer, deferRender = false) {
     const nextZoom = Math.max(50, Math.min(300, requestedZoom))
     if (nextZoom === zoomValue.current) return
     const viewer = scrollRoot.current
@@ -116,6 +126,13 @@ export default function PdfViewer({ src, title, controlsTarget }) {
     }
     zoomValue.current = nextZoom
     setZoom(nextZoom)
+    clearTimeout(zoomRenderTimer.current)
+    if (deferRender) {
+      // Scale the existing page during the gesture; redraw sharply once it stops.
+      zoomRenderTimer.current = setTimeout(() => setRenderZoom(zoomValue.current), 150)
+    } else {
+      setRenderZoom(nextZoom)
+    }
   }
 
   useLayoutEffect(() => {
@@ -125,9 +142,7 @@ export default function PdfViewer({ src, title, controlsTarget }) {
   useEffect(() => {
     const dialog = controlsTarget?.closest('dialog')
     if (!dialog) return
-    let wheelDelta = 0
-    let lastWheelTime = 0
-    let pendingSteps = 0
+    let pendingDelta = 0
     let wheelFrame = null
     let pointer = null
 
@@ -135,21 +150,14 @@ export default function PdfViewer({ src, title, controlsTarget }) {
       if (!dialog.open || !(event.ctrlKey || event.metaKey) || event.altKey) return
       event.preventDefault()
       if (!numPages || !width || !event.deltaY) return
-      const delta = event.deltaMode === 0 ? event.deltaY : Math.sign(event.deltaY) * 100
-      const now = performance.now()
-      if (now - lastWheelTime > 200 || Math.sign(wheelDelta) !== Math.sign(delta)) wheelDelta = 0
-      lastWheelTime = now
-      wheelDelta += delta
-      const steps = Math.trunc(wheelDelta / 100)
-      if (!steps) return
-      wheelDelta -= steps * 100
-      pendingSteps -= steps
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? scrollRoot.current.clientHeight : 1
+      pendingDelta += event.deltaY * unit
       pointer = { x: event.clientX, y: event.clientY }
       if (wheelFrame !== null) return
       wheelFrame = requestAnimationFrame(() => {
         wheelFrame = null
-        changeZoomRef.current(zoomValue.current + pendingSteps * 25, pointer)
-        pendingSteps = 0
+        changeZoomRef.current(zoomValue.current * Math.exp(-pendingDelta / 100), pointer, true)
+        pendingDelta = 0
       })
     }
 
@@ -168,8 +176,7 @@ export default function PdfViewer({ src, title, controlsTarget }) {
       event.preventDefault()
       if (wheelFrame !== null) cancelAnimationFrame(wheelFrame)
       wheelFrame = null
-      pendingSteps = 0
-      wheelDelta = 0
+      pendingDelta = 0
       if (numPages && width) changeZoomRef.current(nextZoom)
     }
 
@@ -212,7 +219,7 @@ export default function PdfViewer({ src, title, controlsTarget }) {
             disabled={!numPages || !width}
             onClick={() => changeZoom(100)}
           >
-            <span aria-live="polite" aria-atomic="true">{zoom} %</span>
+            <span aria-live="polite" aria-atomic="true">{Math.round(zoom)} %</span>
           </button>
           <button
             type="button"
@@ -253,6 +260,7 @@ export default function PdfViewer({ src, title, controlsTarget }) {
               key={index + 1}
               pageNumber={index + 1}
               width={pageWidth}
+              renderWidth={renderWidth}
               scrollRoot={scrollRoot}
             />
           ))}
