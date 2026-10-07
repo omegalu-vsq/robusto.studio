@@ -330,6 +330,22 @@ p {
   letter-spacing: -0.035em;
   margin: 0 0 13px;
 }
+.project-title-end {
+  display: inline-block;
+  white-space: nowrap;
+}
+.project-date {
+  display: inline-block;
+  margin-left: 0.65em;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(10px, 0.8vw, 11px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: normal;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
 .project-description {
   max-width: 620px;
   font-size: 14px;
@@ -408,40 +424,10 @@ p {
 .project-media > * + figure {
   margin-top: 25px;
 }
-.media-button {
-  position: relative;
-  display: block;
-  padding: 0;
+.media-image {
   width: 100%;
+  height: auto;
   border: 1px solid var(--line);
-  color: inherit;
-  background: transparent;
-  overflow: hidden;
-}
-.media-button > img {
-  width: 100%;
-  aspect-ratio: 1.9;
-  object-fit: cover;
-  border: 0;
-}
-.media-expand {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 31px;
-  height: 31px;
-  display: grid;
-  place-items: center;
-  background: var(--cream);
-  color: var(--green);
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-.media-expand svg {
-  width: 15px;
-}
-.media-button:hover .media-expand {
-  transform: rotate(45deg);
 }
 .project-media figcaption {
   display: flex;
@@ -517,8 +503,11 @@ p {
   gap: 28px;
   align-items: center;
   font-size: 12px;
+  border: 0;
   border-bottom: 1px solid #203c3266;
-  padding-bottom: 7px;
+  padding: 0 0 7px;
+  background: transparent;
+  color: inherit;
 }
 .text-link svg {
   width: 16px;
@@ -622,8 +611,10 @@ p {
   width: 155px;
 }
 .lightbox {
-  padding: 20px;
-  border: 1px solid #f4f0e233;
+  --preview-padding: 12px;
+  font-style: italic;
+  padding: var(--preview-padding);
+  border: 0;
   background: var(--dark);
   color: var(--cream);
   max-width: 1000px;
@@ -639,24 +630,54 @@ p {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
-  margin-bottom: 20px;
+  height: 28px;
+  min-height: 28px;
+  margin: calc(-1 * var(--preview-padding)) calc(-1 * var(--preview-padding)) 6px;
+  padding-left: 12px;
+  flex-shrink: 0;
 }
 .lightbox-header h2 {
-  font: 30px var(--serif);
+  font: italic 400 12px/1.2 var(--serif);
+  color: #b5c8b9;
   margin: 0;
 }
-.lightbox-header button {
+.lightbox-actions {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.lightbox-header button,
+.lightbox-download {
   background: transparent;
   color: inherit;
-  border: 1px solid #f4f0e244;
-  padding: 8px 12px;
+  border: 0;
+  padding: 0 8px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 6px;
   font-size: 11px;
+  line-height: 1.2;
 }
-.lightbox-header button span {
-  font-size: 22px;
+.lightbox-download svg {
+  width: 12px;
+  transform: rotate(90deg);
+}
+.lightbox-header .lightbox-close {
+  background: rgb(226, 35, 26);
+  color: #fff;
+  min-width: 70px;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-header button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -5px;
+}
+.lightbox-close span {
+  font-size: 14px;
+  line-height: 1;
 }
 .lightbox > img {
   max-height: 65svh;
@@ -667,6 +688,51 @@ p {
   font-size: 10px;
   color: #b5c8b9;
   margin: 16px 0 0;
+}
+.lightbox-document {
+  --preview-padding: 0px;
+  padding: 0;
+  width: 94vw;
+  max-width: 1320px;
+  height: 92svh;
+  max-height: 92svh;
+  overflow: hidden;
+}
+.lightbox-document[open] {
+  display: flex;
+  flex-direction: column;
+}
+.lightbox-document .lightbox-header {
+  gap: 12px;
+  padding: 0 0 0 12px;
+  margin-bottom: 0;
+}
+.lightbox-document .lightbox-header h2 {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lightbox-zoom {
+  display: flex;
+  align-items: stretch;
+}
+.lightbox-zoom button {
+  min-width: 24px;
+  justify-content: center;
+  padding: 0 5px;
+}
+.lightbox-zoom .lightbox-zoom-reset {
+  min-width: 44px;
+  font-variant-numeric: tabular-nums;
+}
+.lightbox-zoom button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.lightbox-zoom button:hover:not(:disabled) {
+  background: #f4f0e217;
 }
 .project-logo-surface {
   width: min(100%, 300px);
@@ -705,16 +771,6 @@ p {
   display: block;
   aspect-ratio: 16 / 9;
   background: #203c3214;
-}
-.project-media figcaption a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.project-media figcaption svg {
-  width: 12px;
 }
 .media-pending {
   border: 1px dashed var(--line);
@@ -1005,14 +1061,21 @@ p {
     margin-left: auto;
   }
   .lightbox {
-    padding: 14px;
+    --preview-padding: 10px;
     width: 94vw;
   }
-  .lightbox-header h2 {
-    font-size: 24px;
+  .lightbox-document {
+    --preview-padding: 0px;
+    padding: 0;
   }
-  .lightbox-header button {
-    padding: 6px 9px;
+  .lightbox-header button,
+  .lightbox-download {
+    padding: 0 6px;
+  }
+}
+@media (max-width: 480px) {
+  .lightbox-download-label {
+    display: none;
   }
 }
 @media (prefers-reduced-motion: no-preference) {

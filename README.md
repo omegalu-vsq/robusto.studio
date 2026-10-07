@@ -77,6 +77,19 @@ Les manuels PDF sont associés à Fastlane et MétroGL, les rapports à Awaken
 Memory (Anluda Games) et Sudoku Solver (Sudo Pacman), et `Projet_TYPO.pdf` à
 l’étude typographique.
 
+Les PDF, y compris le CV, s’ouvrent dans une fenêtre de lecture au-dessus du site,
+avec un lecteur intégré fondé sur [React-PDF](https://github.com/wojtekmaj/react-pdf)
+et PDF.js. Les pages défilent directement sous une barre fine avec zoom, téléchargement
+et fermeture. Le zoom va de 50 à 300 %, conserve la position de lecture et se
+réinitialise en cliquant sur le pourcentage. Tant que le PDF est ouvert,
+Ctrl + molette, Ctrl + / − et Ctrl + 0 pilotent aussi ce zoom (Cmd sur Mac).
+La molette conserve le point sous le curseur ; le défilement normal reste disponible.
+Le texte reste sélectionnable et
+les liens du PDF fonctionnent. Seules les pages
+proches de la zone visible sont rendues pour limiter la mémoire utilisée.
+Le lecteur, son worker et ses ressources sont servis localement et chargés à
+l’ouverture d’un PDF. La fermeture rend le focus au bouton qui a ouvert le document.
+
 Pour ajouter d’autres contenus, importer les fichiers depuis `assets/`, ou les
 déposer dans `public/projects/<identifiant>/`, puis renseigner :
 
@@ -85,7 +98,7 @@ déposer dans `public/projects/<identifiant>/`, puis renseigner :
 - `reportUrl` : chemin du rapport PDF ; `reportLabel` permet d’afficher « Manuel PDF » ; `reportPlanned: true` indique un rapport à venir.
 - `slidesUrl` : PDF local ou lien externe de présentation, si une présentation doit être ajoutée.
 - `documentUrl` : PDF d’un projet documentaire, comme l’étude typographique ; `documentPlanned: true` indique un document à venir.
-- `media` : liste d’illustrations et/ou de vidéos YouTube. Les vidéos disponibles utilisent le lecteur `youtube.com/embed`, avec plein écran et format 16:9 responsive, et disposent aussi d’un lien YouTube. `embedUrl` permet de reprendre l’URL exacte du code d’intégration fourni par YouTube. Une entrée `pending` peut annoncer une vidéo en préparation.
+- `media` : liste d’illustrations et/ou de vidéos YouTube. Les vidéos disponibles utilisent le lecteur `youtube.com/embed`, avec plein écran et format 16:9 responsive. `embedUrl` permet de reprendre l’URL exacte du code d’intégration fourni par YouTube. Une entrée `pending` peut annoncer une vidéo en préparation.
 - `mediaKind: 'images'` : indique des illustrations à venir lorsque `media` est vide. Aucun faux résultat de projet n’est affiché.
 
 ```js

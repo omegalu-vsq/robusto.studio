@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import SectionDivider from './components/SectionDivider'
 import { categories, projects } from './data/projects'
 import { checkRepositoryAccess, getGitHubRepository } from './lib/github'
@@ -6,6 +6,8 @@ import { createHeaderContour } from './lib/header-shapes'
 import epitaLogo from '../assets/img/epitalogo.png'
 import imageLogo from '../assets/img/imagelogo.png'
 import './App.css'
+
+const PdfViewer = lazy(() => import('./components/PdfViewer'))
 
 function Arrow({ diagonal = false, ...props }) {
   return (
@@ -68,6 +70,20 @@ function ResourceLink({ href, children, ...props }) {
   )
 }
 
+function PdfButton({ href, title, onOpen, className = 'resource-link', children }) {
+  return (
+    <button
+      type="button"
+      className={className}
+      aria-haspopup="dialog"
+      onClick={() => onOpen({ type: 'pdf', title, src: href })}
+    >
+      {children}
+      <Arrow diagonal />
+    </button>
+  )
+}
+
 function SourceCodeLink({ href, projectId }) {
   const repository = getGitHubRepository(href)
   const [check, setCheck] = useState({ href, status: 'checking' })
@@ -122,7 +138,7 @@ function SourceCodeLink({ href, projectId }) {
   )
 }
 
-function ProjectResources({ project }) {
+function ProjectResources({ project, onOpen }) {
   const resources = [
     {
       url: project.sourceUrl,
@@ -146,7 +162,7 @@ function ProjectResources({ project }) {
       label: 'Document PDF',
     },
   ].filter((resource) => resource.url || resource.planned)
-  if (!resources.length) return null
+  if (!resources.length && !project.cover) return null
   return (
     <div className="project-resources">
       {resources.map((resource) =>
@@ -157,6 +173,15 @@ function ProjectResources({ project }) {
               href={resource.url}
               projectId={project.id}
             />
+          ) : /\.pdf(?:[?#]|$)/i.test(resource.url) ? (
+            <PdfButton
+              key={resource.label}
+              href={resource.url}
+              title={`${project.name} — ${resource.label}`}
+              onOpen={onOpen}
+            >
+              {resource.label}
+            </PdfButton>
           ) : (
             <ResourceLink key={resource.label} href={resource.url}>
               {resource.label}
@@ -167,6 +192,23 @@ function ProjectResources({ project }) {
             {resource.label} à venir
           </span>
         ),
+      )}
+      {project.cover && (
+        <button
+          type="button"
+          className="resource-link"
+          aria-haspopup="dialog"
+          onClick={() =>
+            onOpen({
+              type: 'image',
+              title: project.name,
+              src: project.cover.src,
+              alt: project.cover.alt,
+            })
+          }
+        >
+          Voir la jaquette <Arrow diagonal />
+        </button>
       )}
     </div>
   )
@@ -194,7 +236,7 @@ function MediaPending({ title, detail, kind = 'video' }) {
   )
 }
 
-function MediaPreview({ project, onOpen }) {
+function MediaPreview({ project }) {
   if (!project.media.length && !project.mediaKind) return null
   return (
     <div className="project-media">
@@ -225,31 +267,20 @@ function MediaPreview({ project, onOpen }) {
                     allowFullScreen
                   />
                   <figcaption>
-                    <span>
-                      {String(i + 1).padStart(2, '0')} / {media.alt}
-                    </span>
-                    <a
-                      href={`https://youtu.be/${media.youtubeId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir sur YouTube <Arrow diagonal />
-                    </a>
+                    {String(i + 1).padStart(2, '0')} / {media.alt}
                   </figcaption>
                   {media.note && <p className="media-note">{media.note}</p>}
                 </>
               ) : (
                 <>
-                  <button
-                    className="media-button"
-                    onClick={() => onOpen({ project, media })}
-                    aria-label={`Agrandir : ${media.alt}`}
-                  >
-                    <img src={media.src} alt={media.alt} loading="lazy" />
-                    <span className="media-expand">
-                      <Arrow diagonal />
-                    </span>
-                  </button>
+                  <img
+                    className="media-image"
+                    src={media.src}
+                    alt={media.alt}
+                    width={media.width}
+                    height={media.height}
+                    loading="lazy"
+                  />
                   <figcaption>{media.alt}</figcaption>
                 </>
               )}
@@ -264,6 +295,8 @@ function MediaPreview({ project, onOpen }) {
 }
 
 function ProjectCard({ project, onOpen }) {
+  const lastSpace = project.name.lastIndexOf(' ')
+
   return (
     <article
       id={project.id}
@@ -275,7 +308,6 @@ function ProjectCard({ project, onOpen }) {
           <span>
             {project.number} / {project.category}
           </span>
-          {project.date && <span>{project.date}</span>}
         </div>
       )}
       <div className="project-layout">
@@ -283,37 +315,55 @@ function ProjectCard({ project, onOpen }) {
           <ProjectLogo project={project} />
         </div>
         <div className="project-detail">
-          <h3 id={`${project.id}-title`}>{project.name}</h3>
+          <h3 id={`${project.id}-title`}>
+            {project.date ? (
+              <>
+                {project.name.slice(0, lastSpace + 1)}
+                <span className="project-title-end">
+                  {project.name.slice(lastSpace + 1)}
+                  <span className="project-date">{project.date}</span>
+                </span>
+              </>
+            ) : (
+              project.name
+            )}
+          </h3>
           <p className="project-description">{project.description}</p>
           <ul className="tech-list" aria-label="Technologies">
             {project.technologies.map((tech) => (
               <li key={tech}>{tech}</li>
             ))}
           </ul>
-          <ProjectResources project={project} />
-          <MediaPreview project={project} onOpen={onOpen} />
+          <ProjectResources project={project} onOpen={onOpen} />
+          <MediaPreview project={project} />
         </div>
       </div>
     </article>
   )
 }
 
-function Lightbox({ selected, onClose }) {
+function PreviewDialog({ selected, onClose }) {
   const dialog = useRef(null)
+  const [pdfControls, setPdfControls] = useState(null)
   useEffect(() => {
     if (!selected) return
     const previousOverflow = document.body.style.overflow
+    const previousFocus = document.activeElement
+    const element = dialog.current
     document.body.style.overflow = 'hidden'
-    dialog.current.showModal()
+    element.showModal()
     return () => {
+      element.close()
       document.body.style.overflow = previousOverflow
+      if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true })
     }
   }, [selected])
+
   if (!selected) return null
   return (
     <dialog
       ref={dialog}
-      className="lightbox"
+      className={`lightbox${selected.type === 'pdf' ? ' lightbox-document' : ''}`}
       aria-labelledby="lightbox-title"
       onCancel={onClose}
       onClick={(event) => {
@@ -321,13 +371,55 @@ function Lightbox({ selected, onClose }) {
       }}
     >
       <div className="lightbox-header">
-        <h2 id="lightbox-title">{selected.project.name}</h2>
-        <button onClick={onClose} autoFocus aria-label="Fermer l’aperçu">
-          Fermer <span aria-hidden="true">×</span>
-        </button>
+        <h2 id="lightbox-title">{selected.title}</h2>
+        <div className="lightbox-actions">
+          {selected.type === 'pdf' && (
+            <>
+              <div
+                className="lightbox-zoom"
+                ref={setPdfControls}
+                role="group"
+                aria-label="Zoom du document"
+              />
+              <a
+                className="lightbox-download"
+                href={selected.src}
+                download={`${selected.title}.pdf`}
+                aria-label="Télécharger le document"
+                title="Télécharger le document"
+              >
+                <span className="lightbox-download-label">Télécharger</span> <Arrow />
+              </a>
+            </>
+          )}
+          <button
+            type="button"
+            className="lightbox-close"
+            onClick={onClose}
+            autoFocus
+            aria-label="Fermer l’aperçu"
+          >
+            Fermer <span aria-hidden="true">×</span>
+          </button>
+        </div>
       </div>
-      <img src={selected.media.src} alt={selected.media.alt} />
-      <p>{selected.media.alt}</p>
+      {selected.type === 'pdf' ? (
+        <Suspense
+          fallback={<p className="pdf-status" role="status">Chargement du document…</p>}
+        >
+          <PdfViewer
+            key={selected.src}
+            src={selected.src}
+            title={selected.title}
+            controlsTarget={pdfControls}
+          />
+        </Suspense>
+      ) : (
+        <>
+          <img src={selected.src} alt={selected.alt} />
+          <p>{selected.alt}</p>
+        </>
+      )}
     </dialog>
   )
 }
@@ -588,14 +680,14 @@ function App() {
               l’informatique graphique et le traitement d’image à partir de
               février 2027.
             </p>
-            <a
+            <PdfButton
               className="text-link"
               href="/cv-lucas-estrade.pdf"
-              target="_blank"
-              rel="noreferrer"
+              title="CV — Lucas Estrade"
+              onOpen={setSelected}
             >
-              Consulter mon CV <Arrow diagonal />
-            </a>
+              Consulter mon CV
+            </PdfButton>
           </div>
           <div className="about-copy">
             <p>
@@ -664,7 +756,7 @@ function App() {
           </div>
         </footer>
       </main>
-      <Lightbox selected={selected} onClose={() => setSelected(null)} />
+      <PreviewDialog selected={selected} onClose={() => setSelected(null)} />
     </>
   )
 }

@@ -3,6 +3,9 @@ import metroglLogo from '../../assets/img/metrogllogo.png'
 import chromauraLogo from '../../assets/img/chromauralogo.png'
 import ivokSignalsLogo from '../../assets/img/ivoksignalslogo.png'
 import awakenMemoryLogo from '../../assets/img/awakenmemorylogo.png'
+import awakenMemoryCover from '../../assets/img/awakenmemoryboxcover.png'
+import raytracerIllustration from '../../assets/img/ray.png'
+import pbrDemo from '../../assets/img/repr.gif'
 import sudokuLogo from '../../assets/img/sudokusolverlogo.png'
 import cataractorLogo from '../../assets/img/cataractorlogonew.png'
 import ivokEditorLogo from '../../assets/img/ivoklogo.png'
@@ -100,13 +103,21 @@ export const projects = [
     logo: null,
     sourceUrl: null,
     mediaKind: 'images',
-    media: [],
+    media: [
+      {
+        type: 'image',
+        src: pbrDemo,
+        alt: 'Démonstration du moteur photoréaliste.',
+        width: 800,
+        height: 398,
+      },
+    ],
   },
   {
     id: 'raytracer',
     name: 'Raytracer C++',
     wordmark: ['Raytracer.'],
-    date: null,
+    date: '2026',
     category: 'Synthèse d’image',
     discipline: 'Ray tracing · Éclairage Lambert–Phong',
     description:
@@ -114,10 +125,18 @@ export const projects = [
     technologies: ['C++', 'Ray tracing', 'Lambert', 'Phong'],
     tone: 'dark',
     logo: null,
-    sourceUrl: null,
-    sourcePlanned: true,
+    sourceUrl: 'https://github.com/omegalu-vsq/raytracer',
     mediaKind: 'images',
-    media: [],
+    media: [
+      {
+        type: 'image',
+        src: raytracerIllustration,
+        alt:
+          'La sphère jade à gauche a un fort coefficient diffus, tandis que la sphère bleue à droite a un fort coefficient spéculaire.',
+        width: 1920,
+        height: 1080,
+      },
+    ],
   },
   {
     id: 'chromaura',
@@ -128,7 +147,7 @@ export const projects = [
     discipline: 'Installation · Interaction corporelle',
     description:
       'Expérience visuelle interactive qui utilise un capteur Kinect pour détecter silhouettes et mouvements, conçue avec Godot en C#.',
-    technologies: ['Godot', 'C#', 'Kinect'],
+    technologies: ['Godot', 'C#', 'Kinect', 'MediaPipe'],
     tone: 'sage',
     logo: chromauraLogo,
     logoFrame: { viewBox: '0 0 1586 284', width: 1587, height: 284 },
@@ -141,7 +160,7 @@ export const projects = [
           'https://www.youtube.com/embed/2IRo9NuWq-4?si=LqqsBH3w39oRXlvX',
         alt: 'Démonstration de ChromAura',
         note:
-          'Réglez la qualité de la vidéo sur 1440p pour limiter les effets de la compression YouTube.',
+          'N’hésitez pas à régler la qualité de la vidéo sur 1440p pour limiter les effets de la compression YouTube.',
       },
     ],
   },
@@ -170,15 +189,21 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'MedViz · Visualisation médicale',
     description:
-      'Projet de visualisation médicale réalisé en groupe dans le cadre de MedViz.',
-    technologies: ['Visualisation médicale'],
+      'Projet de visualisation médicale réalisé en groupe.',
+    technologies: ['Visualisation médicale', 'SVM'],
     tone: 'dark',
     logo: cataractorLogo,
     logoFrame: { viewBox: '367 468 1286 130', width: 1920, height: 1080 },
     sourceUrl: 'https://github.com/AndreaIzzillo/Cataractor',
     reportUrl: null,
-    mediaKind: 'images',
-    media: [],
+    media: [
+      {
+        type: 'youtube',
+        youtubeId: '6IL0gQ0oAuE',
+        embedUrl: 'https://www.youtube.com/embed/6IL0gQ0oAuE?list=PLQ6KNnC6liH0',
+        alt: 'Cataractor — EPITA IMAGE 2027',
+      },
+    ],
   },
   {
     id: 'awaken-memory',
@@ -195,6 +220,10 @@ export const projects = [
     logoFrame: { viewBox: '7 12 1221 484', width: 1232, height: 501 },
     sourceUrl: null,
     reportUrl: awakenMemoryReport,
+    cover: {
+      src: awakenMemoryCover,
+      alt: 'Jaquette d’Awaken Memory parodiant une jaquette de Nintendo Switch.',
+    },
     media: [
       {
         type: 'pending',
@@ -258,7 +287,7 @@ export const projects = [
     category: 'Projets divers',
     discipline: 'Accessibilité · Environnement de développement',
     description:
-      'IDE web destiné aux personnes en situation de handicap moteur, avec une fonctionnalité de transcription audio.',
+      'IDE web destiné aux personnes tétraplégiques, avec une fonctionnalité de transcription audio.',
     technologies: ['Web', 'Accessibilité', 'Transcription audio'],
     tone: 'cream',
     logo: ivokEditorLogo,
