@@ -14,13 +14,13 @@ const contours = {
   },
   nav: {
     start: [0, 0],
-    startHandle: [0, 16],
+    startHandle: [16, 18],
     nodes: [
-      { point: [20, 40], handle: [0, 16] },
-      { point: [17, 74], handle: [-1, 17] },
+      { point: [-8, 42], handle: [0, 14] },
+      { point: [14, 76], handle: [12, 10] },
     ],
-    end: [100, 100],
-    endHandle: [-36, 0],
+    end: [100, 88],
+    endHandle: [-44, 0],
     amplitude: [3.2, 1.6],
     verticalAmplitude: [2, 1.5],
     phase: 1.4,

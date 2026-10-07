@@ -173,7 +173,7 @@ export const projects = [
     discipline: 'Vision par ordinateur · Classification',
     description:
       'Détection et classification de panneaux routiers par traitement d’image et apprentissage automatique, avec OpenCV et HOG/SVM.',
-    technologies: ['OpenCV', 'HOG', 'SVM'],
+    technologies: ['OpenCV', 'HOG', 'SVM', 'Machine learning'],
     tone: 'cream',
     logo: ivokSignalsLogo,
     logoFrame: { viewBox: '64 13 1552 704', width: 1672, height: 851 },
@@ -189,8 +189,8 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'MedViz · Visualisation médicale',
     description:
-      'Projet de visualisation médicale réalisé en groupe.',
-    technologies: ['Visualisation médicale', 'SVM'],
+      'Application de détection de la cataracte par machine learning, réalisée en groupe pour assister les médecins.',
+    technologies: ['Visualisation médicale', 'SVM', 'Machine learning'],
     tone: 'dark',
     logo: cataractorLogo,
     logoFrame: { viewBox: '367 468 1286 130', width: 1920, height: 1080 },

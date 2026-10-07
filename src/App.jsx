@@ -613,7 +613,6 @@ function App() {
                 <div className="other-projects-heading">
                   <div>
                     <h2 id="other-projects-title">Projets divers.</h2>
-                    <p>Systèmes, compilation, accessibilité et typographie.</p>
                   </div>
                 </div>
               </div>
@@ -722,9 +721,6 @@ function App() {
             <Arrow diagonal />
           </a>
           <div className="contact-links">
-            <a href="mailto:pclucas@outlook.fr">
-              pclucas@outlook.fr <Arrow diagonal />
-            </a>
             <div>
               <a
                 href="https://github.com/omegalu-vsq"

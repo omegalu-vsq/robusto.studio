@@ -120,7 +120,7 @@ informations connues. Tiger utilise Bison et Flex. Le PBR et Awaken Memory ne pr
 d’IVoK Signals reste masqué tant que sa publication n’est pas décidée.
 
 Le favicon SVG reprend le R italique du PNG Sofachrome existant, vectorisé
-et placé dans un carré vert profond.
+en vert profond sur un carré beige, avec les couleurs de la page.
 
 Le CV servi par le site est `public/cv-lucas-estrade.pdf`. Remplacer cette copie
 lorsque le CV à la racine est mis à jour.

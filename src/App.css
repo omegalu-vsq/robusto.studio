@@ -75,7 +75,7 @@
 }
 .header-corner-nav .header-corner-shape {
   inset: 0 0 calc(-18px + 4px * var(--header-progress))
-    calc(-12px - 4px * var(--header-progress));
+    calc(22px - 4px * var(--header-progress));
 }
 .site-brand {
   --brand-padding-x: calc(23px - 5px * var(--header-progress));
@@ -826,12 +826,6 @@ p {
   letter-spacing: -0.035em;
   margin: 0;
 }
-.other-projects-heading p {
-  font-size: 12px;
-  line-height: 1.7;
-  color: #b5c8b9;
-  margin: 18px 0 0;
-}
 .other-projects-list {
   width: 90%;
   max-width: 1440px;
@@ -871,6 +865,9 @@ p {
   }
   .header-corner-brand .header-corner-shape {
     right: calc(-32px + 8px * var(--header-progress));
+  }
+  .header-corner-nav .header-corner-shape {
+    left: calc(16px - 4px * var(--header-progress));
   }
   .site-header nav {
     font-size: 12px;
@@ -914,7 +911,7 @@ p {
     bottom: calc(-18px + 4px * var(--header-progress));
   }
   .header-corner-nav .header-corner-shape {
-    left: calc(-12px * var(--header-progress));
+    left: calc(8px - 8px * var(--header-progress));
     bottom: calc(-18px + 3px * var(--header-progress));
   }
   .site-header nav {
@@ -987,11 +984,6 @@ p {
   }
   .other-projects-heading h2 {
     font-size: clamp(36px, 9vw, 54px);
-  }
-  .other-projects-heading p {
-    font-size: 11px;
-    line-height: 1.7;
-    margin-top: 15px;
   }
   .other-projects-with-main {
     margin-top: 32px;
