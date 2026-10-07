@@ -68,7 +68,7 @@ export const projects = [
     discipline: 'Temps réel · Environnement 3D',
     description:
       'Station du métro parisien reconstruite et rendue en temps réel, avec des modèles réalisés sur Blender, un rendu OpenGL et des shaders en GLSL.',
-    technologies: ['OpenGL', 'GLSL', 'Blender'],
+    technologies: ['C++', 'OpenGL', 'GLSL', 'Blender'],
     tone: 'sage',
     logo: metroglLogo,
     logoFrame: { viewBox: '8 65 1435 352', width: 1445, height: 558 },
@@ -146,7 +146,7 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'Installation · Interaction corporelle',
     description:
-      'Expérience visuelle interactive qui utilise un capteur Kinect pour détecter silhouettes et mouvements, conçue avec Godot en C#.',
+      'Expérience visuelle interactive avec capteur Kinect pour détecter silhouettes et mouvements, conçue avec Godot en C#.',
     technologies: ['Godot', 'C#', 'Kinect', 'MediaPipe'],
     tone: 'sage',
     logo: chromauraLogo,
@@ -189,7 +189,7 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'MedViz · Visualisation médicale',
     description:
-      'Application de détection de la cataracte par machine learning, réalisée en groupe pour assister les médecins.',
+      'Application d’assistance médicale pour la détection de la cataracte par machine learning.',
     technologies: ['Visualisation médicale', 'SVM', 'Machine learning'],
     tone: 'dark',
     logo: cataractorLogo,
@@ -253,7 +253,7 @@ export const projects = [
     id: '42sh',
     name: '42sh',
     wordmark: ['42sh'],
-    date: null,
+    date: '2025',
     category: 'Projets divers',
     discipline: 'Système · Shell Unix',
     description:
@@ -268,7 +268,7 @@ export const projects = [
     id: 'tiger',
     name: 'Tiger',
     wordmark: ['Tiger'],
-    date: null,
+    date: '2025',
     category: 'Projets divers',
     discipline: 'Compilation · Langage Tiger',
     description:
@@ -283,7 +283,7 @@ export const projects = [
     id: 'ivok-editor',
     name: 'IVoK Editor',
     wordmark: ['IVoK', 'EDITOR'],
-    date: null,
+    date: '2025',
     category: 'Projets divers',
     discipline: 'Accessibilité · Environnement de développement',
     description:
@@ -299,7 +299,7 @@ export const projects = [
     id: 'typographie-ratp',
     name: 'Étude typographique',
     wordmark: ['TYPO'],
-    date: null,
+    date: '2025',
     category: 'Projets divers',
     discipline: 'Typographie · Mise en page',
     description:
