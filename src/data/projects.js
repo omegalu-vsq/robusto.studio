@@ -307,6 +307,7 @@ export const projects = [
     technologies: ['LaTeX', 'Typographie'],
     tone: 'sage',
     logo: latexLogo,
+    logoFrame: { viewBox: '0 0 1200 500', width: 1200, height: 500 },
     sourceUrl: null,
     documentUrl: typographyDocument,
     media: [],

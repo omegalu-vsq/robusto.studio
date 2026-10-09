@@ -28,6 +28,14 @@ Les filtres et les aperçus de médias sont fonctionnels au clavier.
 Les titres des projets utilisent Fraunces en graisse 700, avec des traits plus
 solides et une taille légèrement augmentée, adaptée à l’écran.
 
+Chaque projet est accessible directement avec une ancre, par exemple
+`https://robusto.studio/#cataractor`. Le positionnement initial attend le rendu
+des projets et le chargement des polices, avec l’espace prévu sous le header.
+Si un changement d’ancre vise un projet masqué par le filtre actuel, le filtre
+revient sur « Tous » avant le défilement. Les ancres reprennent les `id` des
+projets dans `src/data/projects.js` ; les conserver pour les liens utilisés
+dans le CV.
+
 Les fonds des projets et les grands blocs sont reliés par des courbes SVG
 asymétriques, fixes et sans animation. Trois contours alternent pour garder des
 séparations souples. Une ligne courbe discrète sépare les cartes de même couleur,
@@ -122,8 +130,10 @@ d’IVoK Signals reste masqué tant que sa publication n’est pas décidée.
 Le favicon SVG reprend le R italique du PNG Sofachrome existant, vectorisé
 en vert profond sur un carré beige, avec les couleurs de la page.
 
-Le CV servi par le site est `public/cv-lucas-estrade.pdf`. Remplacer cette copie
-lorsque le CV à la racine est mis à jour.
+Le CV servi par le site est `assets/pdf/cvLucas.pdf`, importé par Vite comme les
+autres documents. Il contient le fond actualisé et les liens directs vers les
+projets du portfolio. Les fichiers de travail dans `exports/cv/` sont exclus du
+dépôt.
 
 ## Développement local
 

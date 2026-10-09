@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local CV exports
+/exports/cv/
+
 # Windows download metadata
 *:Zone.Identifier
 

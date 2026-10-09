@@ -5,6 +5,7 @@ import { checkRepositoryAccess, getGitHubRepository } from './lib/github'
 import { createHeaderContour } from './lib/header-shapes'
 import epitaLogo from '../assets/img/epitalogo.png'
 import imageLogo from '../assets/img/imagelogo.png'
+import cvDocument from '../assets/pdf/cvLucas.pdf?url'
 import './App.css'
 
 const PdfViewer = lazy(() => import('./components/PdfViewer'))
@@ -537,9 +538,68 @@ function SiteHeader() {
   )
 }
 
+function getHashTarget() {
+  try {
+    return decodeURIComponent(window.location.hash.slice(1))
+  } catch {
+    return ''
+  }
+}
+
 function App() {
   const [category, setCategory] = useState('Tous')
   const [selected, setSelected] = useState(null)
+  const [anchor, setAnchor] = useState(getHashTarget)
+  const initialNavigation = useRef(true)
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const target = getHashTarget()
+      const project = projects.find((project) => project.id === target)
+      if (project && !document.getElementById(target)) {
+        setCategory('Tous')
+        setAnchor(target)
+      } else {
+        setAnchor('')
+      }
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  useEffect(() => {
+    if (!anchor) {
+      initialNavigation.current = false
+      return
+    }
+    const target = document.getElementById(anchor)
+    if (!target) {
+      initialNavigation.current = false
+      return
+    }
+
+    let active = true
+    let frame = null
+    document.fonts.ready.then(() => {
+      if (!active) return
+      frame = window.requestAnimationFrame(() => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+        target.scrollIntoView({
+          block: 'start',
+          behavior:
+            initialNavigation.current || reducedMotion.matches
+              ? 'instant'
+              : 'smooth',
+        })
+        initialNavigation.current = false
+      })
+    })
+    return () => {
+      active = false
+      if (frame !== null) window.cancelAnimationFrame(frame)
+    }
+  }, [anchor])
+
   const visibleProjects = projects.filter(
     (project) => category === 'Tous' || project.category === category,
   )
@@ -681,7 +741,7 @@ function App() {
             </p>
             <PdfButton
               className="text-link"
-              href="/cv-lucas-estrade.pdf"
+              href={cvDocument}
               title="CV — Lucas Estrade"
               onOpen={setSelected}
             >
