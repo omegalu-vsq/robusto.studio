@@ -84,6 +84,7 @@ issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:LaTeX_logo.s
 Les manuels PDF sont associés à Fastlane, MétroGL et ChromAura, les rapports à Awaken
 Memory (Anluda Games) et Sudoku Solver (Sudo Pacman), et `Projet_TYPO.pdf` à
 l’étude typographique.
+Les slides de Fastlane et d’IVoK Signals sont accessibles par le bouton « Présentation ».
 
 Les PDF, y compris le CV, s’ouvrent dans une fenêtre de lecture au-dessus du site,
 avec un lecteur intégré fondé sur [React-PDF](https://github.com/wojtekmaj/react-pdf)
@@ -111,6 +112,7 @@ déposer dans `public/projects/<identifiant>/`, puis renseigner :
 - `documentUrl` : PDF d’un projet documentaire, comme l’étude typographique ; `documentPlanned: true` indique un document à venir.
 - `media` : liste d’illustrations et/ou de vidéos YouTube. Les vidéos disponibles utilisent le lecteur `youtube.com/embed`, avec plein écran et format 16:9 responsive. `embedUrl` permet de reprendre l’URL exacte du code d’intégration fourni par YouTube. Une entrée `pending` peut annoncer une vidéo en préparation.
 - `mediaKind: 'images'` : indique des illustrations à venir lorsque `media` est vide. Aucun faux résultat de projet n’est affiché.
+- `mediaLayout: 'carousel'` : affiche les illustrations une par une, avec une navigation manuelle. Chaque image peut avoir une `caption` distincte de son texte alternatif `alt`.
 
 ```js
 logo: '/projects/fastlane/logo.png',

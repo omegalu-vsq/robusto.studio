@@ -237,8 +237,115 @@ function MediaPending({ title, detail, kind = 'video' }) {
   )
 }
 
+function CarouselArrowButton({ direction, disabled, controls, onClick }) {
+  const [clickCount, setClickCount] = useState(0)
+  const isPrevious = direction === 'previous'
+
+  return (
+    <button
+      type="button"
+      className={`carousel-control carousel-control-${direction}`}
+      aria-label={isPrevious ? 'Illustration précédente' : 'Illustration suivante'}
+      aria-controls={controls}
+      disabled={disabled}
+      onClick={() => {
+        setClickCount((current) => current + 1)
+        onClick()
+      }}
+    >
+      <span
+        key={clickCount}
+        className={`carousel-arrow-motion${clickCount ? ' is-moving' : ''}`}
+      >
+        <svg
+          className={isPrevious ? 'carousel-arrow-previous' : undefined}
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+          preserveAspectRatio="none"
+        >
+          <path d="M3 10.875H16.425L11.4 5.85 13 4.25 20.75 12 13 19.75 11.4 18.15 16.425 13.125H3Z" />
+        </svg>
+      </span>
+    </button>
+  )
+}
+
+function ImageCarousel({ project }) {
+  const [index, setIndex] = useState(0)
+  const media = project.media[index]
+  const figureId = `${project.id}-illustration`
+
+  return (
+    <div
+      className="project-media image-carousel"
+      role="group"
+      aria-roledescription="carrousel"
+      aria-label={`Illustrations de ${project.name}`}
+    >
+      <figure id={figureId}>
+        <div className="carousel-frame">
+          <img
+            className="media-image"
+            src={media.src}
+            alt={media.alt}
+            width={media.width}
+            height={media.height}
+            loading="lazy"
+          />
+          {project.media.length > 1 && (
+            <div
+              className="carousel-controls"
+              role="group"
+              aria-label="Navigation des illustrations"
+            >
+              <CarouselArrowButton
+                direction="previous"
+                controls={figureId}
+                disabled={index === 0}
+                onClick={() => setIndex((current) => current - 1)}
+              />
+              <CarouselArrowButton
+                direction="next"
+                controls={figureId}
+                disabled={index === project.media.length - 1}
+                onClick={() => setIndex((current) => current + 1)}
+              />
+            </div>
+          )}
+        </div>
+        {project.media.length > 1 && (
+          <div
+            className="carousel-dots"
+            role="group"
+            aria-label="Choisir une illustration"
+          >
+            {project.media.map((item, position) => (
+              <button
+                key={item.src}
+                type="button"
+                className="carousel-dot"
+                aria-label={`Afficher l’illustration ${position + 1} sur ${project.media.length}`}
+                aria-current={position === index ? 'true' : undefined}
+                aria-controls={figureId}
+                onClick={() => setIndex(position)}
+              />
+            ))}
+          </div>
+        )}
+        <figcaption className="carousel-caption" aria-live="polite" aria-atomic="true">
+          {media.caption || media.alt}
+        </figcaption>
+      </figure>
+    </div>
+  )
+}
+
 function MediaPreview({ project }) {
   if (!project.media.length && !project.mediaKind) return null
+  if (project.mediaLayout === 'carousel' && project.media.length) {
+    return <ImageCarousel project={project} />
+  }
   return (
     <div className="project-media">
       {project.media.length ? (
@@ -613,7 +720,6 @@ function App() {
   const otherProjects = visibleProjects.filter(
     (project) => project.category === 'Projets divers',
   )
-  const projectCount = String(projects.length).padStart(2, '0')
 
   return (
     <>
@@ -644,7 +750,6 @@ function App() {
                 onClick={() => setCategory(name)}
               >
                 {name}
-                {name === 'Tous' && <span>{projectCount}</span>}
               </button>
             ))}
           </div>
@@ -739,7 +844,7 @@ function App() {
               Élève ingénieur à EPITA · Majeure IMAGE
             </p>
             <p className="about-search">
-              À la recherche d’un stage de fin d’études de 6 mois dans
+              Je suis actuellement à la recherche d’un stage de fin d’études de 6 mois dans
               l’informatique graphique et le traitement d’image à partir de
               février 2027.
             </p>
@@ -755,21 +860,14 @@ function App() {
           <div className="about-copy">
             <p>
               Curieux de plusieurs aspects de l’informatique, je suis surtout
-              intéressé par la synthèse et le traitement d’image.
+              intéressé par la synthèse et le traitement d’image. Cet intérêt est aussi porté
+              par mon appétence pour les arts visuels tels que la création vidéo (notamment le cinéma),
+              les jeux vidéo ou encore les logos.
+              <br />
               Je suis également un grand passionné des transports en commun
-              depuis mon enfance. En outre, j’aime beaucoup le cinéma d’auteur
-              et jouer au tennis.
+              depuis mon enfance, notamment des bus, dont je collectionne les maquettes, et des métros.
+              En outre, j’aime beaucoup les sports de raquette, en particulier le tennis.
             </p>
-            <div className="about-facts">
-              <div>
-                <span>Formation</span>
-                <strong>EPITA · Majeure IMAGE</strong>
-              </div>
-              <div>
-                <span>Localisation</span>
-                <strong>Bourg-la-Reine, France</strong>
-              </div>
-            </div>
           </div>
         </section>
         <SectionDivider from="cream" to="dark" />
@@ -810,8 +908,14 @@ function App() {
             </div>
           </div>
           <div className="footer-bottom">
-            <img src="/wordmark-sofachrome.png" alt="robusto.studio" />
-            <span>© {new Date().getFullYear()} Lucas Estrade</span>
+            <img
+              className="footer-wordmark"
+              src="/wordmark-sofachrome.png"
+              alt="robusto.studio"
+            />
+            <span className="footer-copyright">
+              © {new Date().getFullYear()} Lucas Estrade
+            </span>
             <a href="#">Retour en haut ↑</a>
           </div>
         </footer>

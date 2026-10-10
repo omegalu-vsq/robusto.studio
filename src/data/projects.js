@@ -2,6 +2,13 @@ import fastlaneLogo from '../../assets/img/fastlanelogo.png'
 import metroglLogo from '../../assets/img/metrogllogo.png'
 import chromauraLogo from '../../assets/img/chromauralogo.png'
 import ivokSignalsLogo from '../../assets/img/ivoksignalslogo.png'
+import ivokSignalsSuccess from '../../assets/img/ivoksuccess.png'
+import ivokSignalsSuccess2 from '../../assets/img/ivoksuccess2.png'
+import ivokSignalsSuccess3 from '../../assets/img/ivoksuccess3.png'
+import ivokSignalsSuccess4 from '../../assets/img/ivoksuccess4.png'
+import ivokSignalsSuccess5 from '../../assets/img/ivoksuccess5.png'
+import ivokSignalsSuccess6 from '../../assets/img/ivoksuccess6.png'
+import ivokSignalsError from '../../assets/img/ivokerror.png'
 import awakenMemoryLogo from '../../assets/img/awakenmemorylogo.png'
 import awakenMemoryCover from '../../assets/img/awakenmemoryboxcover.png'
 import raytracerIllustration from '../../assets/img/ray.png'
@@ -12,6 +19,7 @@ import ivokEditorLogo from '../../assets/img/ivoklogo.png'
 import latexLogo from '../../assets/img/latex-logo.svg'
 import fastlaneManual from '../../assets/pdf/ISIM___Fastlane_Engine_Manuel.pdf?url'
 import fastlaneSlides from '../../assets/pdf/FastlaneSlides.pdf?url'
+import ivokSignalsSlides from '../../assets/pdf/IvokSignalsSlides.pdf?url'
 import metroglManual from '../../assets/pdf/POGL___MétroGL_Manuel.pdf?url'
 import chromauraManual from '../../assets/pdf/CFW___ChromAura_Manuel.pdf?url'
 import awakenMemoryReport from '../../assets/pdf/Anluda_Games___Rapport_de_Soutenance_3_2023.pdf?url'
@@ -46,7 +54,7 @@ export const projects = [
 
       Le manuel détaille comment prendre en main le projet, tandis que les transparents comportent des schémas et les
       formules utilisées dans le code.`,
-    technologies: ['C++'],
+    technologies: ['C++', 'SDL2'],
     tone: 'cream',
     logo: fastlaneLogo,
     logoFrame: { viewBox: '27 113 1455 348', width: 1482, height: 490 },
@@ -77,8 +85,8 @@ export const projects = [
     description:
       `Reproduction d'une station de métro parisienne typique avec son fameux carrelage blanc biseauté.
       Celle-ci est reconstruite et rendue en temps réel, avec des modèles réalisés sur Blender, un rendu OpenGL et des shaders en GLSL.
-      Le rendu utilise un modèle d'éclairage Lambert-Phong.`,
-    technologies: ['C++', 'OpenGL', 'GLSL', 'Blender'],
+      Le rendu est basé sur un modèle d'éclairage Lambert-Phong.`,
+    technologies: ['C++', 'OpenGL', 'GLSL', 'Blender', 'FreeGLUT', 'Assimp'],
     tone: 'sage',
     logo: metroglLogo,
     logoFrame: { viewBox: '8 65 1435 352', width: 1445, height: 558 },
@@ -104,10 +112,7 @@ export const projects = [
       'Moteur de rendu PBR avec une BRDF diffuse de Lambert, une BRDF spéculaire de Cook–Torrance GGX et un éclairage basé sur l’environnement (IBL).',
     technologies: [
       'TypeScript',
-      'WebGL',
-      'Lambert',
-      'Cook–Torrance GGX',
-      'IBL',
+      'WebGL', 'GLSL'
     ],
     tone: 'cream',
     logo: null,
@@ -159,8 +164,8 @@ export const projects = [
       Expérience visuelle interactive avec capteur Kinect, conçue avec Godot en C#. L'objectif était de créer une expérience facilement utilisable et
       configurable pour l'exposer lors des portes ouvertes de l'école. Le programme détecte la silhouette des utilisateurs et la
       reconstruit avec des particules brillantes animées. La position des doigts est également détectée, ce qui permet par exemple de dessiner
-      en levant le doigt, ou bien de déclancher diverses animations telles que le coeur ou le pistolet.`,
-    technologies: ['Godot', 'C#', 'Kinect', 'MediaPipe'],
+      en levant le doigt, ou bien de déclencher diverses animations telles que le cœur ou le pistolet.`,
+    technologies: ['Godot', 'GDScript', 'C#', 'Kinect', 'MediaPipe'],
     tone: 'sage',
     logo: chromauraLogo,
     logoFrame: { viewBox: '0 0 1586 284', width: 1587, height: 284 },
@@ -187,14 +192,49 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'Vision par ordinateur · Classification',
     description:
-      'Détection et classification de panneaux routiers par traitement d’image et apprentissage automatique, avec OpenCV et HOG/SVM.',
-    technologies: ['Python', 'C++', 'OpenCV', 'HOG', 'SVM'],
+      `Programme de détection et de reconnaissance de panneaux routiers développé en Python puis réimplémenté en C++. Celui-ci propose des
+      zones candidates à partir des couleurs et des contours présents dans l’image, puis en extrait différentes caractéristiques telles que
+      le descripteur HOG, un histogramme HSV et plusieurs statistiques de couleur. Deux modèles SVM permettent ensuite de distinguer les panneaux
+      du décor, puis d’identifier leur classe.
+
+      Les transparents comportent de nombreuses illustrations concernant les masques pour les étapes de localisation, et plus globalement
+      quelques informations sur le modèle.
+      `,
+    technologies: ['Python', 'C++', 'OpenCV', 'NumPy', 'Scikit'],
     tone: 'cream',
     logo: ivokSignalsLogo,
     logoFrame: { viewBox: '64 13 1552 704', width: 1672, height: 851 },
     sourceUrl: null,
+    slidesUrl: ivokSignalsSlides,
     mediaKind: 'images',
-    media: [],
+    mediaLayout: 'carousel',
+    media: [
+      ...[
+        ivokSignalsSuccess,
+        ivokSignalsSuccess2,
+        ivokSignalsSuccess3,
+        ivokSignalsSuccess4,
+        ivokSignalsSuccess5,
+        ivokSignalsSuccess6,
+      ].map((src, position) => ({
+        type: 'image',
+        src,
+        alt: `Résultat de détection de panneaux routiers — scène ${position + 1}.`,
+        caption:
+          'Ici, tous les panneaux du ground truth sont correctement détectés et classifiés par le modèle.',
+        width: 1360,
+        height: 800,
+      })),
+      {
+        type: 'image',
+        src: ivokSignalsError,
+        alt: 'Candidats finaux de la localisation et panneau rejeté par le modèle.',
+        caption:
+          'Bonus : cette image présente tous les candidats finaux de la localisation, dont un se trouve sur le panneau, mais le modèle rejette ce candidat.',
+        width: 1360,
+        height: 800,
+      },
+    ],
   },
   {
     id: 'cataractor',
@@ -204,8 +244,13 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'MedViz · Visualisation médicale',
     description:
-      'Application d’assistance médicale pour la détection de la cataracte par machine learning.',
-    technologies: ['Python', 'SVM'],
+      `
+      Application d’assistance médicale pour la détection de la cataracte par machine learning. Développée en React
+      et TypeScript avec un backend Python, elle analyse des photographies du fond de l’œil à l’aide d’un modèle SVM
+      entraîné sur ODIR-5K. L’interface permet de consulter les résultats et les métriques des images, de les inspecter, d'appliquer
+      des filtres et de prendre des notes pour chaque œil.
+      `,
+    technologies: ['Python', 'React', 'FastAPI', 'Vite', 'Scikit', 'NumPy'],
     tone: 'dark',
     logo: cataractorLogo,
     logoFrame: { viewBox: '367 468 1286 130', width: 1920, height: 1080 },
@@ -256,7 +301,7 @@ export const projects = [
     discipline: 'Reconnaissance · Résolution automatique',
     description:
       'Résolveur automatique de sudoku avec détection de formes et réseau de neurones, écrit en C.',
-    technologies: ['C'],
+    technologies: ['C', 'SDL2', 'GTK'],
     tone: 'cream',
     logo: sudokuLogo,
     logoFrame: { viewBox: '16 18 1046 135', width: 1065, height: 160 },
@@ -273,7 +318,7 @@ export const projects = [
     discipline: 'Système · Shell Unix',
     description:
       `Shell écrit en C, avec conception d'un lexer, d'un parser et d'un arbre syntaxique abstrait (AST).`,
-    technologies: ['C', 'AST', 'Lexer', 'Parser'],
+    technologies: ['C'],
     tone: 'dark',
     logo: null,
     sourceUrl: null,
@@ -304,7 +349,7 @@ export const projects = [
     discipline: 'Accessibilité · Environnement de développement',
     description:
       'IDE web destiné aux personnes tétraplégiques, avec une fonctionnalité de reconnaissance vocale.',
-    technologies: ['React'],
+    technologies: ['React', 'Java', 'Monaco Editor', 'Quarkus', 'Web Speech API'],
     tone: 'cream',
     logo: ivokEditorLogo,
     logoFrame: { viewBox: '158 245 1254 495', width: 1500, height: 1000 },
