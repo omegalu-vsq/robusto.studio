@@ -297,6 +297,10 @@ function MediaPreview({ project }) {
 
 function ProjectCard({ project, onOpen }) {
   const lastSpace = project.name.lastIndexOf(' ')
+  const description = project.description
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim().replace(/\s*\n\s*/g, ' '))
+    .join('\n\n')
 
   return (
     <article
@@ -329,7 +333,7 @@ function ProjectCard({ project, onOpen }) {
               project.name
             )}
           </h3>
-          <p className="project-description">{project.description}</p>
+          <p className="project-description">{description}</p>
           <ul className="tech-list" aria-label="Technologies">
             {project.technologies.map((tech) => (
               <li key={tech}>{tech}</li>
@@ -750,11 +754,11 @@ function App() {
           </div>
           <div className="about-copy">
             <p>
-              Curieux et passionné par plusieurs aspects de l’informatique, je
-              suis surtout intéressé par la synthèse et le traitement d’image.
+              Curieux de plusieurs aspects de l’informatique, je suis surtout
+              intéressé par la synthèse et le traitement d’image.
               Je suis également un grand passionné des transports en commun
-              depuis mon enfance. Outre ces deux passions, j’aime beaucoup le
-              cinéma d’auteur et jouer au tennis.
+              depuis mon enfance. En outre, j’aime beaucoup le cinéma d’auteur
+              et jouer au tennis.
             </p>
             <div className="about-facts">
               <div>

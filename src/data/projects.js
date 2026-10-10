@@ -11,6 +11,7 @@ import cataractorLogo from '../../assets/img/cataractorlogonew.png'
 import ivokEditorLogo from '../../assets/img/ivoklogo.png'
 import latexLogo from '../../assets/img/latex-logo.svg'
 import fastlaneManual from '../../assets/pdf/ISIM___Fastlane_Engine_Manuel.pdf?url'
+import fastlaneSlides from '../../assets/pdf/FastlaneSlides.pdf?url'
 import metroglManual from '../../assets/pdf/POGL___MétroGL_Manuel.pdf?url'
 import awakenMemoryReport from '../../assets/pdf/Anluda_Games___Rapport_de_Soutenance_3_2023.pdf?url'
 import sudokuReport from '../../assets/pdf/The_Sudo_Pacman_project___Rapport_Final.pdf?url'
@@ -37,15 +38,21 @@ export const projects = [
     date: '2026',
     category: 'Synthèse d’image',
     discipline: 'Moteur de rendu · Pseudo-3D',
-    description:
-      'Moteur de rendu pseudo-3D pour la génération et la projection de routes, développé en C++.',
+    description: `Moteur de rendu développé en C++ conçu pour calculer et afficher des routes dites "pseudo-3D".
+      Le moteur est capable d'afficher des virages, des montagnes, des sprites de décoration,
+      ainsi que plusieurs couches pour le ciel/fond, dont on peut régler la vitesse de défilement selon les virages pour
+      créer un effet de parallaxe. Il est également possible de plaquer des images/sprites sur la surface projetée.
+
+      Le manuel détaille comment prendre en main le projet, tandis que les transparents comportent des schémas et les
+      formules utilisées dans le code.`,
     technologies: ['C++', 'Pseudo-3D', 'Projection'],
     tone: 'cream',
     logo: fastlaneLogo,
     logoFrame: { viewBox: '27 113 1455 348', width: 1482, height: 490 },
     sourceUrl: 'https://github.com/omegalu-vsq/fastlane',
     reportUrl: fastlaneManual,
-    reportLabel: 'Manuel PDF',
+    reportLabel: 'Manuel',
+    slidesUrl: fastlaneSlides,
     media: [
       {
         type: 'pending',
@@ -67,14 +74,16 @@ export const projects = [
     category: 'Synthèse d’image',
     discipline: 'Temps réel · Environnement 3D',
     description:
-      'Station du métro parisien reconstruite et rendue en temps réel, avec des modèles réalisés sur Blender, un rendu OpenGL et des shaders en GLSL.',
+      `Reproduction d'une station de métro parisienne typique avec son fameux carrelage blanc biseauté.
+      Celle-ci est reconstruite et rendue en temps réel, avec des modèles réalisés sur Blender, un rendu OpenGL et des shaders en GLSL.
+      Le rendu utilise un modèle d'éclairage Lambert-Phong.`,
     technologies: ['C++', 'OpenGL', 'GLSL', 'Blender'],
     tone: 'sage',
     logo: metroglLogo,
     logoFrame: { viewBox: '8 65 1435 352', width: 1445, height: 558 },
     sourceUrl: 'https://github.com/omegalu-vsq/metro-gl',
     reportUrl: metroglManual,
-    reportLabel: 'Manuel PDF',
+    reportLabel: 'Manuel',
     media: [
       {
         type: 'youtube',
@@ -122,7 +131,7 @@ export const projects = [
     discipline: 'Ray tracing · Éclairage Lambert–Phong',
     description:
       'Raytracer développé en C++ avec un modèle d’éclairage Lambert–Phong.',
-    technologies: ['C++', 'Ray tracing', 'Lambert', 'Phong'],
+    technologies: ['C++', 'Lambert', 'Phong'],
     tone: 'dark',
     logo: null,
     sourceUrl: 'https://github.com/omegalu-vsq/raytracer',
@@ -173,7 +182,7 @@ export const projects = [
     discipline: 'Vision par ordinateur · Classification',
     description:
       'Détection et classification de panneaux routiers par traitement d’image et apprentissage automatique, avec OpenCV et HOG/SVM.',
-    technologies: ['OpenCV', 'HOG', 'SVM', 'Machine learning'],
+    technologies: ['Python', 'C++', 'OpenCV', 'HOG', 'SVM', 'Machine learning'],
     tone: 'cream',
     logo: ivokSignalsLogo,
     logoFrame: { viewBox: '64 13 1552 704', width: 1672, height: 851 },
@@ -190,7 +199,7 @@ export const projects = [
     discipline: 'MedViz · Visualisation médicale',
     description:
       'Application d’assistance médicale pour la détection de la cataracte par machine learning.',
-    technologies: ['Visualisation médicale', 'SVM', 'Machine learning'],
+    technologies: ['Python', 'SVM', 'Machine learning'],
     tone: 'dark',
     logo: cataractorLogo,
     logoFrame: { viewBox: '367 468 1286 130', width: 1920, height: 1080 },
@@ -214,7 +223,7 @@ export const projects = [
     discipline: 'Jeu vidéo · RPG en 2D',
     description:
       'Jeu de rôle en 2D au tour par tour, conçu sur Unity et développé en C#.',
-    technologies: ['Unity', 'C#', '2D'],
+    technologies: ['Unity', 'C#'],
     tone: 'sage',
     logo: awakenMemoryLogo,
     logoFrame: { viewBox: '7 12 1221 484', width: 1232, height: 501 },
@@ -272,7 +281,8 @@ export const projects = [
     category: 'Projets divers',
     discipline: 'Compilation · Langage Tiger',
     description:
-      'Compilateur du langage Tiger développé en C++, avec Bison pour l’analyse syntaxique et Flex pour l’analyse lexicale.',
+      `Compilateur du langage Tiger développé en C++ à partir d'une base de code,
+      avec Bison pour l’analyse syntaxique et Flex pour l’analyse lexicale.`,
     technologies: ['C++', 'Bison', 'Flex'],
     tone: 'sage',
     logo: null,
@@ -287,8 +297,8 @@ export const projects = [
     category: 'Projets divers',
     discipline: 'Accessibilité · Environnement de développement',
     description:
-      'IDE web destiné aux personnes tétraplégiques, avec une fonctionnalité de transcription audio.',
-    technologies: ['Web', 'Accessibilité', 'Transcription audio'],
+      'IDE web destiné aux personnes tétraplégiques, avec une fonctionnalité de reconnaissance vocale.',
+    technologies: ['React', 'Web', 'Accessibilité'],
     tone: 'cream',
     logo: ivokEditorLogo,
     logoFrame: { viewBox: '158 245 1254 495', width: 1500, height: 1000 },

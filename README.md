@@ -106,7 +106,7 @@ déposer dans `public/projects/<identifiant>/`, puis renseigner :
 
 - `logo` : chemin du logo, idéalement transparent ; sinon le lettrage provisoire reste visible.
 - `sourceUrl` : URL du dépôt. Sans URL, le bouton est masqué ; `sourcePlanned: true` affiche « Code source à venir » uniquement pour les projets dont la publication est prévue.
-- `reportUrl` : chemin du rapport PDF ; `reportLabel` permet d’afficher « Manuel PDF » ; `reportPlanned: true` indique un rapport à venir.
+- `reportUrl` : chemin du rapport PDF ; `reportLabel` permet d’afficher « Manuel » ; `reportPlanned: true` indique un rapport à venir.
 - `slidesUrl` : PDF local ou lien externe de présentation, si une présentation doit être ajoutée.
 - `documentUrl` : PDF d’un projet documentaire, comme l’étude typographique ; `documentPlanned: true` indique un document à venir.
 - `media` : liste d’illustrations et/ou de vidéos YouTube. Les vidéos disponibles utilisent le lecteur `youtube.com/embed`, avec plein écran et format 16:9 responsive. `embedUrl` permet de reprendre l’URL exacte du code d’intégration fourni par YouTube. Une entrée `pending` peut annoncer une vidéo en préparation.
