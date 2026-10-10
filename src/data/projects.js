@@ -13,6 +13,7 @@ import latexLogo from '../../assets/img/latex-logo.svg'
 import fastlaneManual from '../../assets/pdf/ISIM___Fastlane_Engine_Manuel.pdf?url'
 import fastlaneSlides from '../../assets/pdf/FastlaneSlides.pdf?url'
 import metroglManual from '../../assets/pdf/POGL___MétroGL_Manuel.pdf?url'
+import chromauraManual from '../../assets/pdf/CFW___ChromAura_Manuel.pdf?url'
 import awakenMemoryReport from '../../assets/pdf/Anluda_Games___Rapport_de_Soutenance_3_2023.pdf?url'
 import sudokuReport from '../../assets/pdf/The_Sudo_Pacman_project___Rapport_Final.pdf?url'
 import typographyDocument from '../../assets/pdf/Projet_TYPO.pdf?url'
@@ -45,7 +46,7 @@ export const projects = [
 
       Le manuel détaille comment prendre en main le projet, tandis que les transparents comportent des schémas et les
       formules utilisées dans le code.`,
-    technologies: ['C++', 'Pseudo-3D', 'Projection'],
+    technologies: ['C++'],
     tone: 'cream',
     logo: fastlaneLogo,
     logoFrame: { viewBox: '27 113 1455 348', width: 1482, height: 490 },
@@ -131,7 +132,7 @@ export const projects = [
     discipline: 'Ray tracing · Éclairage Lambert–Phong',
     description:
       'Raytracer développé en C++ avec un modèle d’éclairage Lambert–Phong.',
-    technologies: ['C++', 'Lambert', 'Phong'],
+    technologies: ['C++'],
     tone: 'dark',
     logo: null,
     sourceUrl: 'https://github.com/omegalu-vsq/raytracer',
@@ -154,13 +155,18 @@ export const projects = [
     date: '2026',
     category: 'Traitement & vision',
     discipline: 'Installation · Interaction corporelle',
-    description:
-      'Expérience visuelle interactive avec capteur Kinect pour détecter silhouettes et mouvements, conçue avec Godot en C#.',
+    description:`
+      Expérience visuelle interactive avec capteur Kinect, conçue avec Godot en C#. L'objectif était de créer une expérience facilement utilisable et
+      configurable pour l'exposer lors des portes ouvertes de l'école. Le programme détecte la silhouette des utilisateurs et la
+      reconstruit avec des particules brillantes animées. La position des doigts est également détectée, ce qui permet par exemple de dessiner
+      en levant le doigt, ou bien de déclancher diverses animations telles que le coeur ou le pistolet.`,
     technologies: ['Godot', 'C#', 'Kinect', 'MediaPipe'],
     tone: 'sage',
     logo: chromauraLogo,
     logoFrame: { viewBox: '0 0 1586 284', width: 1587, height: 284 },
     sourceUrl: 'https://github.com/Ggabin018/ChromAura',
+    reportUrl: chromauraManual,
+    reportLabel: 'Manuel',
     media: [
       {
         type: 'youtube',
@@ -182,7 +188,7 @@ export const projects = [
     discipline: 'Vision par ordinateur · Classification',
     description:
       'Détection et classification de panneaux routiers par traitement d’image et apprentissage automatique, avec OpenCV et HOG/SVM.',
-    technologies: ['Python', 'C++', 'OpenCV', 'HOG', 'SVM', 'Machine learning'],
+    technologies: ['Python', 'C++', 'OpenCV', 'HOG', 'SVM'],
     tone: 'cream',
     logo: ivokSignalsLogo,
     logoFrame: { viewBox: '64 13 1552 704', width: 1672, height: 851 },
@@ -199,7 +205,7 @@ export const projects = [
     discipline: 'MedViz · Visualisation médicale',
     description:
       'Application d’assistance médicale pour la détection de la cataracte par machine learning.',
-    technologies: ['Python', 'SVM', 'Machine learning'],
+    technologies: ['Python', 'SVM'],
     tone: 'dark',
     logo: cataractorLogo,
     logoFrame: { viewBox: '367 468 1286 130', width: 1920, height: 1080 },
@@ -249,8 +255,8 @@ export const projects = [
     category: 'Traitement & vision',
     discipline: 'Reconnaissance · Résolution automatique',
     description:
-      'Résolveur automatique de sudoku avec détection de formes et réseau de neurones, entièrement écrit en C.',
-    technologies: ['C', 'Traitement d’image', 'Réseau de neurones'],
+      'Résolveur automatique de sudoku avec détection de formes et réseau de neurones, écrit en C.',
+    technologies: ['C'],
     tone: 'cream',
     logo: sudokuLogo,
     logoFrame: { viewBox: '16 18 1046 135', width: 1065, height: 160 },
@@ -266,7 +272,7 @@ export const projects = [
     category: 'Projets divers',
     discipline: 'Système · Shell Unix',
     description:
-      'Shell écrit en C, avec un lexer, un parser et un arbre syntaxique abstrait (AST) implémentés à la main.',
+      `Shell écrit en C, avec conception d'un lexer, d'un parser et d'un arbre syntaxique abstrait (AST).`,
     technologies: ['C', 'AST', 'Lexer', 'Parser'],
     tone: 'dark',
     logo: null,
@@ -298,7 +304,7 @@ export const projects = [
     discipline: 'Accessibilité · Environnement de développement',
     description:
       'IDE web destiné aux personnes tétraplégiques, avec une fonctionnalité de reconnaissance vocale.',
-    technologies: ['React', 'Web', 'Accessibilité'],
+    technologies: ['React'],
     tone: 'cream',
     logo: ivokEditorLogo,
     logoFrame: { viewBox: '158 245 1254 495', width: 1500, height: 1000 },
@@ -314,7 +320,7 @@ export const projects = [
     discipline: 'Typographie · Mise en page',
     description:
       'Travail de typographie et de mise en page en LaTeX.',
-    technologies: ['LaTeX', 'Typographie'],
+    technologies: ['LaTeX'],
     tone: 'sage',
     logo: latexLogo,
     logoFrame: { viewBox: '0 0 1200 500', width: 1200, height: 500 },

@@ -81,7 +81,7 @@ est vert profond pour faire ressortir leurs logos.
 Le projet de typographie utilise le logo LaTeX dans `assets/img/latex-logo.svg`,
 issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:LaTeX_logo.svg).
 
-Les manuels PDF sont associés à Fastlane et MétroGL, les rapports à Awaken
+Les manuels PDF sont associés à Fastlane, MétroGL et ChromAura, les rapports à Awaken
 Memory (Anluda Games) et Sudoku Solver (Sudo Pacman), et `Projet_TYPO.pdf` à
 l’étude typographique.
 
@@ -124,7 +124,10 @@ media: [
 ```
 
 Les dates et technologies non précisées sont laissées vides ou limitées aux
-informations connues. Tiger utilise Bison et Flex. Le PBR et Awaken Memory ne proposent pas de code ; celui
+informations connues. Les tags sont réservés à la stack technique ; ne pas y
+ajouter de mots-clés descriptifs généraux. Lucas précisera les technologies à
+compléter après vérification dans les projets concernés.
+Tiger utilise Bison et Flex. Le PBR et Awaken Memory ne proposent pas de code ; celui
 d’IVoK Signals reste masqué tant que sa publication n’est pas décidée.
 
 Le favicon SVG reprend le R italique du PNG Sofachrome existant, vectorisé
