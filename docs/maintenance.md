@@ -25,6 +25,21 @@ fond de leur section. `tone` adapte la couleur de toute la section au contraste
 du logo (`cream`, `sage` ou `dark`). Les projets sans logo partagent un lettrage
 monospace. Le logo IVoK Editor est limité à 200 px de large.
 Les filtres et les aperçus de médias sont fonctionnels au clavier.
+Les filtres utilisent deux blobs SVG mobiles : vert profond pour la sélection,
+sauge pour le survol ou le focus au clavier. Quatre grandes courbes arrondies
+se déforment continuellement, même lorsque le pointeur reste immobile.
+Les libellés utilisent Fraunces Variable, servie localement par
+`@fontsource-variable/fraunces/wght.css`, avec une graisse 300 au repos.
+Un seul texte reste visible : sa graisse s’interpole jusqu’à 700, sa taille
+augmente et il s’incline progressivement de 10° à la sélection, en devenant beige.
+L’inclinaison vient de `skewX` : les dessins romain et italique de Fraunces sont
+distincts et ne proposent pas de transition continue entre eux.
+Les boutons réservent la largeur du libellé agrandi pour éviter de déplacer
+les autres catégories. Les contours changent
+immédiatement à chaque catégorie, tandis que leur position glisse. Leur léger
+mouvement s’arrête hors écran et respecte la réduction des animations.
+À l’entrée du survol, le blob clair apparaît directement à sa nouvelle position ;
+il glisse uniquement lorsqu’il est déjà visible sur une autre catégorie.
 Les titres des projets utilisent Fraunces en graisse 700, avec des traits plus
 solides et une taille légèrement augmentée, adaptée à l’écran.
 

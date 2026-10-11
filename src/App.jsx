@@ -1,5 +1,6 @@
 import { Fragment, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import SectionDivider from './components/SectionDivider'
+import ProjectFilters from './components/ProjectFilters'
 import { categories, projects } from './data/projects'
 import { checkRepositoryAccess, getGitHubRepository } from './lib/github'
 import { createHeaderContour } from './lib/header-shapes'
@@ -738,21 +739,7 @@ function App() {
               <h1 id="projects-title">Projets.</h1>
             </div>
           </div>
-          <div
-            className="project-filters"
-            role="group"
-            aria-label="Filtrer les projets par domaine"
-          >
-            {categories.map((name) => (
-              <button
-                key={name}
-                aria-pressed={category === name}
-                onClick={() => setCategory(name)}
-              >
-                {name}
-              </button>
-            ))}
-          </div>
+          <ProjectFilters categories={categories} selected={category} onSelect={setCategory} />
           <div className="project-list">
             {mainProjects.map((project, index) => (
               <Fragment key={project.id}>
@@ -865,7 +852,7 @@ function App() {
               les jeux vidéo ou encore les logos.
               <br />
               Je suis également un grand passionné des transports en commun
-              depuis mon enfance, notamment des bus, dont je collectionne les maquettes, et des métros.
+              depuis mon enfance, notamment des bus dont je collectionne les maquettes, et des métros.
               En outre, j’aime beaucoup les sports de raquette, en particulier le tennis.
             </p>
           </div>
