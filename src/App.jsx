@@ -1,6 +1,7 @@
 import { Fragment, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import SectionDivider from './components/SectionDivider'
 import ProjectFilters from './components/ProjectFilters'
+import YouTubeDescription from './components/YouTubeDescription'
 import { categories, projects } from './data/projects'
 import { checkRepositoryAccess, getGitHubRepository } from './lib/github'
 import { createHeaderContour } from './lib/header-shapes'
@@ -379,6 +380,7 @@ function MediaPreview({ project }) {
                     {String(i + 1).padStart(2, '0')} / {media.alt}
                   </figcaption>
                   {media.note && <p className="media-note">{media.note}</p>}
+                  <YouTubeDescription videoId={media.youtubeId} />
                 </>
               ) : (
                 <>

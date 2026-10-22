@@ -100,7 +100,18 @@ issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:LaTeX_logo.s
 Les manuels PDF sont associés à Fastlane, MétroGL et ChromAura, les rapports à Awaken
 Memory (Anluda Games) et Sudoku Solver (Sudo Pacman), et `Projet_TYPO.pdf` à
 l’étude typographique.
-Les slides de Fastlane et d’IVoK Signals sont accessibles par le bouton « Présentation ».
+Les slides de Fastlane, MétroGL et IVoK Signals sont accessibles par le bouton « Présentation ».
+
+Chaque vidéo YouTube possède un bouton pour afficher puis replier sa description.
+Les descriptions complètes sont synchronisées depuis les pages publiques YouTube
+avant chaque build par `scripts/sync-youtube.mjs`, puis servies depuis
+`public/youtube/<identifiant>.json`. Le clic charge uniquement le fichier de la
+vidéo concernée ; le résultat est conservé en mémoire pour les réouvertures.
+Les sauts de ligne sont préservés et les URL ouvrent un nouvel onglet.
+`npm run sync:youtube` permet une actualisation manuelle. Les identifiants sont
+lus directement dans `src/data/projects.js` ; conserver les `youtubeId` littéraux.
+Si YouTube est temporairement inaccessible, le build garde les copies locales.
+Pour construire hors connexion : `YOUTUBE_SYNC_OFFLINE=1 npm run build`.
 
 Les PDF, y compris le CV, s’ouvrent dans une fenêtre de lecture au-dessus du site,
 avec un lecteur intégré fondé sur [React-PDF](https://github.com/wojtekmaj/react-pdf)

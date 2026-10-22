@@ -21,6 +21,7 @@ import fastlaneManual from '../../assets/pdf/ISIM___Fastlane_Engine_Manuel.pdf?u
 import fastlaneSlides from '../../assets/pdf/FastlaneSlides.pdf?url'
 import ivokSignalsSlides from '../../assets/pdf/IvokSignalsSlides.pdf?url'
 import metroglManual from '../../assets/pdf/POGL___MétroGL_Manuel.pdf?url'
+import metroglSlides from '../../assets/pdf/MétroGLSlides.pdf?url'
 import chromauraManual from '../../assets/pdf/CFW___ChromAura_Manuel.pdf?url'
 import awakenMemoryReport from '../../assets/pdf/Anluda_Games___Rapport_de_Soutenance_3_2023.pdf?url'
 import sudokuReport from '../../assets/pdf/The_Sudo_Pacman_project___Rapport_Final.pdf?url'
@@ -93,6 +94,7 @@ export const projects = [
     sourceUrl: 'https://github.com/omegalu-vsq/metro-gl',
     reportUrl: metroglManual,
     reportLabel: 'Manuel',
+    slidesUrl: metroglSlides,
     media: [
       {
         type: 'youtube',

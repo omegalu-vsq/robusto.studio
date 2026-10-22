@@ -1,0 +1,5 @@
+{
+  "videoId": "_Zywu5EYRPg",
+  "title": "Fastlane Engine (nobody here) — EPITA IMAGE 2027",
+  "description": "Démonstration technique de Fastlane Engine, conçu pour calculer et afficher des routes dites \"pseudo 3D\". Le moteur est capable d'afficher des virages, des montagnes (qu'on voit peu ici), des sprites de décoration à l'extérieur de la route, ainsi que plusieurs layers pour le ciel/fond, dont on peut régler la vitesse de défilement selon les virages.\n\nLe thème de cette démo est inspirée de la vidéo suivante : https://youtu.be/-RFunvF0mDw. La musique en est également tirée.\n\nJ'ai été aidé de Codex pour réaliser les assets, mais le système du moteur et son code sont faits à la main. Voici les sources : https://github.com/omegalu-vsq/fastlane.\n\nProjet réalisé en tant que projet étudiant à EPITA en 2e année du cycle ingénieur pour la matière ISIM, enseignée par Jonathan Fabrizio."
+}

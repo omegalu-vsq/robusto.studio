@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/sync-youtube.mjs",
     "build": "vite build",
+    "sync:youtube": "node scripts/sync-youtube.mjs",
     "lint": "oxlint",
     "test": "node --test src/lib/*.test.js",
     "preview": "vite preview"

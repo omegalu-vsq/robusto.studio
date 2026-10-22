@@ -930,6 +930,46 @@ p {
   aspect-ratio: 16 / 9;
   background: #203c3214;
 }
+.youtube-description {
+  margin-top: 9px;
+}
+.youtube-description-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  padding: 5px 0;
+  color: inherit;
+  background: transparent;
+  font-size: 10px;
+}
+.youtube-description-toggle svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 180ms ease;
+}
+.youtube-description-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+.youtube-description-content:not([hidden]) {
+  margin-top: 10px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+}
+.youtube-description-content p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.youtube-description-text {
+  white-space: pre-wrap;
+}
+.youtube-description-content a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .media-pending {
   border: 1px dashed var(--line);
   display: flex;
