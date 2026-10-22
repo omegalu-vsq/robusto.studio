@@ -831,9 +831,10 @@ function App() {
               Élève ingénieur à EPITA · Majeure IMAGE
             </p>
             <p className="about-search">
-              Je suis actuellement à la recherche d’un stage de fin d’études de 6 mois dans
-              l’informatique graphique et le traitement d’image à partir de
-              février 2027.
+              Je suis actuellement à la recherche d’un stage de fin d’études de 6 mois
+              à partir de février 2027, dans l’informatique graphique et le traitement
+              d’image ou dans l’ingénierie informatique et les systèmes numériques,
+              idéalement appliqués aux transports.
             </p>
             <PdfButton
               className="text-link"

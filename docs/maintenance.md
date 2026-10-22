@@ -152,8 +152,9 @@ en vert profond sur un carré beige, avec les couleurs de la page.
 
 Le CV servi par le site est `assets/pdf/cvLucas.pdf`, importé par Vite comme les
 autres documents. Il contient le fond actualisé et les liens directs vers les
-projets du portfolio. Les fichiers de travail dans `exports/cv/` sont exclus du
-dépôt.
+projets du portfolio. Son accroche indique uniquement la durée du stage et la
+disponibilité. Les deux CV ciblés restent dans `exports/cv/`, avec les autres
+fichiers de travail exclus du dépôt.
 
 ## Développement local
 
