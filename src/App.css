@@ -642,6 +642,10 @@ p {
   position: relative;
   top: 0.08em;
 }
+.about-affiliation-link {
+  display: inline-flex;
+  flex-shrink: 0;
+}
 .about-affiliation-logo {
   width: auto;
   height: 24px;

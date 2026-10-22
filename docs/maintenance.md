@@ -18,7 +18,8 @@ suivis de quatre « Projets divers », introduits par un bandeau vert profond et
 présentés dans un bloc ivoire sur fond sauge. Le nom, la présentation et le CV
 sont regroupés dans la section « À propos », après les projets.
 Les logos EPITA et IMAGE sont placés côte à côte en exposant du nom, avec un
-agrandissement centré au survol.
+agrandissement centré au survol. Ils ouvrent respectivement le site de l’EPITA
+et la page de la majeure IMAGE dans un nouvel onglet.
 Les logos sont placés à gauche sur ordinateur et centrés en haut sur mobile.
 Leurs couleurs sont préservées et les logos sont affichés directement sur le
 fond de leur section. `tone` adapte la couleur de toute la section au contraste
@@ -155,6 +156,8 @@ autres documents. Il contient le fond actualisé et les liens directs vers les
 projets du portfolio. Son accroche indique uniquement la durée du stage et la
 disponibilité. Les deux CV ciblés restent dans `exports/cv/`, avec les autres
 fichiers de travail exclus du dépôt.
+Les trois versions conservent les liens sur les logos EPITA et IMAGE ainsi que
+sur le nom EPITA dans la rubrique des études.
 
 ## Développement local
 

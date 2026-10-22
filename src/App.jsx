@@ -808,22 +808,38 @@ function App() {
               <span className="about-name-end">
                 Estrade.
                 <span className="about-affiliations">
-                  <img
-                    className="about-affiliation-logo"
-                    src={epitaLogo}
-                    alt="EPITA"
-                    width="1924"
-                    height="1310"
-                    loading="lazy"
-                  />
-                  <img
-                    className="about-affiliation-logo"
-                    src={imageLogo}
-                    alt="Majeure IMAGE"
-                    width="1084"
-                    height="1084"
-                    loading="lazy"
-                  />
+                  <a
+                    className="about-affiliation-link"
+                    href="https://www.epita.fr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="EPITA — nouvel onglet"
+                  >
+                    <img
+                      className="about-affiliation-logo"
+                      src={epitaLogo}
+                      alt="EPITA"
+                      width="1924"
+                      height="1310"
+                      loading="lazy"
+                    />
+                  </a>
+                  <a
+                    className="about-affiliation-link"
+                    href="https://www.epita.fr/diplome-ingenieur/cycle-ingenieur/les-majeures/#image"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Majeure IMAGE — nouvel onglet"
+                  >
+                    <img
+                      className="about-affiliation-logo"
+                      src={imageLogo}
+                      alt="Majeure IMAGE"
+                      width="1084"
+                      height="1084"
+                      loading="lazy"
+                    />
+                  </a>
                 </span>
               </span>
             </h2>
@@ -832,8 +848,8 @@ function App() {
             </p>
             <p className="about-search">
               Je suis actuellement à la recherche d’un stage de fin d’études de 6 mois
-              à partir de février 2027, dans l’informatique graphique et le traitement
-              d’image ou dans l’ingénierie informatique et les systèmes numériques,
+              à partir de février 2027 en ingénierie informatique, notamment en
+              informatique graphique, traitement d’image et systèmes numériques,
               idéalement appliqués aux transports.
             </p>
             <PdfButton
