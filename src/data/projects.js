@@ -359,7 +359,7 @@ export const projects = [
     media: [],
   },
   {
-    id: 'typographie-ratp',
+    id: 'typo',
     name: 'Étude typographique',
     wordmark: ['TYPO'],
     date: '2025',
